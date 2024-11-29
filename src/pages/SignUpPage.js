@@ -3,19 +3,31 @@ import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
 import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
-import { signUp, signInWithGoogle } from "../firebase";
+import { signUp, signInWithGoogle } from "../utils/firebase_auth";
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const onSignUp = async () => {
-    await signUp(email, password);
+
+    
+
+    var result = await signUp(email, password);
+    if(result){
+      //로그인 페이지 이동
+      navigate("/");
+    }
+    
   };
 
   const onGoogleLogin = async () => {
-    await signInWithGoogle();
+    var result = await signInWithGoogle();
+    
   };
 
   return (

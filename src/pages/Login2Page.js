@@ -2,7 +2,7 @@ import login2 from "../assets/img/login2.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import login2Logo from "../assets/img/login2-logo.png";
 
-import { signInWithGoogle, login } from "../firebase";
+import { signInWithGoogle, login } from "../utils/firebase_auth";
 import { useState } from "react";
 
 function Login2Page() {

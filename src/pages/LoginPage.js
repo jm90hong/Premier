@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MdEmail, MdLock, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
-import { auth, login, signInWithGoogle } from "../firebase";
+import { auth, login, signInWithGoogle } from "../utils/firebase_auth";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
