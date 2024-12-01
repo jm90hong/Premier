@@ -8,29 +8,17 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-
-//kyw
-const firebaseConfig1 = {
-  apiKey: "AIzaSyB2tSV0xl5wWHfVpw1mT8I1WJyiDx6lLLI",
-  authDomain: "premier-9e169.firebaseapp.com",
-  projectId: "premier-9e169",
-  storageBucket: "premier-9e169.firebasestorage.app",
-  messagingSenderId: "971891374618",
-  appId: "1:971891374618:web:9d7273cb9abacff01e2fa3",
-  measurementId: "G-KR52XH21JE",
-};
-
-
-//hjm
-const firebaseConfig = {
-  apiKey: "AIzaSyC7Aqs0stZxgmBGnvD0ZGeRNmLIMWQHniQ",
-  authDomain: "jmcoding-27c0b.firebaseapp.com",
-  projectId: "jmcoding-27c0b",
-  storageBucket: "jmcoding-27c0b.appspot.com",
-  messagingSenderId: "66168997581",
-  appId: "1:66168997581:web:1156d9477cc2423df20b84",
-  measurementId: "G-3DY71V8Q8X"
-};
+import { db } from "./firebase_store";
+import { firebaseConfig} from "./f_config";
+import { 
+  addDoc,
+  collection,
+  getDoc,
+  doc,
+  query,
+  where,
+  getDocs 
+} from "firebase/firestore";
 
 
 
@@ -38,52 +26,101 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 const googleProvider = new GoogleAuthProvider();
 
 
 
-const login = async (email, password) => {
+const signIn = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     alert("sign in success");
     console.log(result);
+    return true;
   } catch (error) {
-    alert(error);
     console.error(error);
+    return false;
   }
 };
 
 
 const signInWithGoogle = async () => {
+  console.log("signInWithGoogle");
   try {
     const result = await signInWithPopup(auth, googleProvider);
-    alert("sign in success");
+    console.log(result);
+    console.log(result.user.email);
+    if(result){
+      try {
 
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", result.user.email));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          // 사용자가 존재함  
+          alert("already exist user");
+          return false;
+        }
+
+  
+
+        // 사용자 정보를 Firestore에 저장
+        await addDoc(collection(db, "users"), {
+          email: result.user.email,
+          authProvider: 'google',
+          password: "",
+          createdAt: new Date(),
+          subject:''
+        });
+
+        alert("sign up success");
+        
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    }
     //user 에 저장
     console.log(result);
+    return true;
   } catch (error) {
     alert(error);
     console.error(error);
+    return false;
   }
 };
 
-const signUp = async (email, password) => {
+const signUp = async (email, password,subject) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
-    alert("sign up success");
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("email", "==", result.user.email));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      // 사용자가 존재함  
+      alert("already exist user");
+      return false;
+    }
 
-    //user 에 저장
-    console.log(result);
+
+
+    // 사용자 정보를 Firestore에 저장
+    await addDoc(collection(db, "users"), {
+      email: result.user.email,
+      authProvider: 'web',
+      password: password,
+      createdAt: new Date(),
+      subject:subject
+    });
+
+    alert("sign up success");
 
 
     return true;
   } catch (error) {
-    alert(error);
+    alert("already exist user");
     console.error(error);
 
     return false;
   }
 };
 
-export { auth, signInWithGoogle, login, signUp };
+export { auth, signInWithGoogle, signIn, signUp };
