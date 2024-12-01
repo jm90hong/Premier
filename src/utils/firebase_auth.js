@@ -35,9 +35,10 @@ const signIn = async (email, password) => {
     const result = await signInWithEmailAndPassword(auth, email, password);
     alert("sign in success");
     console.log(result);
+    return true;
   } catch (error) {
-    alert(error);
     console.error(error);
+    return false;
   }
 };
 
@@ -87,7 +88,7 @@ const signInWithGoogle = async () => {
   }
 };
 
-const signUp = async (email, password) => {
+const signUp = async (email, password,subject) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const usersRef = collection(db, "users");
@@ -107,7 +108,7 @@ const signUp = async (email, password) => {
       authProvider: 'web',
       password: password,
       createdAt: new Date(),
-      subject:''
+      subject:subject
     });
 
     alert("sign up success");
