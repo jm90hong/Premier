@@ -4,30 +4,93 @@ import { useState } from "react";
 import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-
 import { signUp, signInWithGoogle } from "../utils/firebase_auth";
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
+  const [codeSent, setCodeSent] = useState(false);
+  const [isCodeCorrect, setIsCodeCorrect] = useState(false);
+  const [subject, setSubject] = useState("");
+
+
 
   const navigate = useNavigate();
 
+
+  //no used
+  const onGoogleLogin = async () => {
+    var result = await signInWithGoogle();
+    if(result){
+      //로그인 페이지 이동
+      navigate("/");
+    }
+  };
+
+
+  
   const onSignUp = async () => {
 
-    
+    if(!isCodeCorrect){
+      alert("check your code");
+      return;
+    }
 
     var result = await signUp(email, password);
     if(result){
       //로그인 페이지 이동
       navigate("/");
     }
-    
   };
 
-  const onGoogleLogin = async () => {
-    var result = await signInWithGoogle();
+
+  
+ 
+
+  const onCode = (code) => {
+    setCode(code);
+    console.log(code);
+
+    if(codeSent == code && codeSent != ""){
+      setIsCodeCorrect(true);
+      alert("code is correct");
+    }else{
+      setIsCodeCorrect(false);
+    }
+  };
+
+
+  const isValidEmail = (email) => {
+    const googleEmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return googleEmailRegex.test(email);
+  };
+
+  const onCheckEmail = async () => {
+    if (!email) {
+      alert("type your email");
+      return;
+    }
     
+    if (!isValidEmail(email)) {
+      alert("Only Google email (@gmail.com) is allowed.");
+      return;
+    }
+    
+
+    var code = generateRandomCode();
+    setCodeSent(code);
+    
+    alert(`send auth code to your email (${code})`);
+
+    // var result = await checkEmail(email);
+    // alert(result);
+  };
+
+
+  //랜덤숫자 생성.
+  const generateRandomCode = () => {
+    return Math.floor(100000 + Math.random() * 900000);
   };
 
   return (
@@ -124,7 +187,40 @@ function SignUpPage() {
                     fontSize: "14px",
                   }}
                 />
+                <button 
+                  onClick={onCheckEmail}
+                  style={{
+                    backgroundColor: "#C10C99",
+                    color: "#fff",
+                    border: "none",
+                    padding: "8px 16px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Confirm
+                </button>
               </div>
+            </div>
+
+            <div>
+              <input
+                  type="code"
+                  value={code}
+                  onChange={(e) => onCode(e.target.value)}
+                  placeholder="Enter your auth code"
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    width: "100%",
+                    fontSize: "14px",
+                    borderBottom: "1px solid #ccc",
+                    marginTop: "10px",
+                    padding: "0.5rem 0",
+                  }}
+                />
+               
             </div>
             <div style={{ textAlign: "left", marginTop: "49px" }}>
               <label style={{ fontSize: "14px" }}>Password</label>
@@ -151,6 +247,34 @@ function SignUpPage() {
                 />
               </div>
             </div>
+
+
+            <div>
+              <label style={{ fontSize: "14px" }}>Subject</label>
+              <select
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                style={{
+                  width: "100%",
+                  padding: "0.5rem", 
+                  marginTop: "49px",
+                  fontSize: "14px",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  backgroundColor: "#fff",
+                  cursor: "pointer",
+                  outline: "none"
+                }}
+              >
+                <option value="" disabled>Select subject</option>
+                <option value="english">English</option>
+                <option value="math">Math</option>
+                <option value="art">Art</option>
+                <option value="science">Science</option>
+                <option value="history">History</option>
+              </select>
+
+            </div>
             <button
               onClick={onSignUp}
               style={{
@@ -168,7 +292,7 @@ function SignUpPage() {
             >
               Sign up
             </button>
-            <p
+            {/* <p
               style={{
                 color: "#B5B5B5",
                 margin: "32px 0",
@@ -193,7 +317,9 @@ function SignUpPage() {
                   fontSize: "18px",
                 }}
               />
-            </div>
+            </div> */}
+
+
           </div>
         </div>
       </div>

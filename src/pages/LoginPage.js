@@ -4,16 +4,20 @@ import { useState } from "react";
 import { MdEmail, MdLock, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
-import { auth, login, signInWithGoogle } from "../utils/firebase_auth";
+import { auth, signIn, signInWithGoogle } from "../utils/firebase_auth";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+  //web login
   const onLogin = async () => {
-    await login(email, password);
+    await signIn(email, password);
   };
 
+
+  //google login
   const onGoogleLogin = async () => {
     await signInWithGoogle();
   };
@@ -170,7 +174,7 @@ function LoginPage() {
             >
               Login
             </button>
-            <p
+            {/* <p
               style={{
                 color: "#B5B5B5",
                 margin: "32px 0",
@@ -195,7 +199,9 @@ function LoginPage() {
                   fontSize: "18px",
                 }}
               />
-            </div>
+            </div> */}
+
+            
           </div>
         </div>
       </div>
