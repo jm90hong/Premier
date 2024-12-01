@@ -8,11 +8,7 @@
 //     appId: "1:971891374618:web:9d7273cb9abacff01e2fa3",
 //     measurementId: "G-KR52XH21JE",
 //   };
-// const googleCloud={
-//     apiKey: "AIzaSyBVNgyD60udevldCjW8kcCizjse1sujg5k",
-//     clientId:'870809184762-j890k3crsdu6a4pnq8gom748mbpnq7o8.apps.googleusercontent.com'
-// }
-  
+
   
 //hjm
 const firebaseConfig = {
@@ -25,13 +21,19 @@ const firebaseConfig = {
     measurementId: "G-3DY71V8Q8X"
 };
 
-const googleCloud={
-    apiKey: "AIzaSyC7Aqs0stZxgmBGnvD0ZGeRNmLIMWQHniQ",
-    clientId:'66168997581-b6ea7c5dhj0q5hasoqne884i4ngc27jp.apps.googleusercontent.com'
+
+//public drive link
+const driveLink = {
+    math:'https://drive.google.com/drive/folders/18XYg15To2OceGfmMWOjH-x9a7SnqDGuJ?dmr=1&ec=wgc-drive-hero-goto&q=sharedwith:public%20parent:18XYg15To2OceGfmMWOjH-x9a7SnqDGuJ',
+    science:'https://drive.google.com/drive/folders/1pest5rgk11wFgBc5pgk3dh1hZzBrbyP3?dmr=1&ec=wgc-drive-hero-goto&q=sharedwith:public%20parent:1pest5rgk11wFgBc5pgk3dh1hZzBrbyP3',
+    english:'https://drive.google.com/drive/folders/1ShY_Mmcyh0NA8Od01qdVBp80LVt50JvP?dmr=1&ec=wgc-drive-hero-goto&q=sharedwith:public%20parent:1ShY_Mmcyh0NA8Od01qdVBp80LVt50JvP',
+    history:'https://drive.google.com/drive/folders/19xC35G1dTECnaN5jC3j63SLv_Jh0V6LH?dmr=1&ec=wgc-drive-hero-goto&q=sharedwith:public%20parent:19xC35G1dTECnaN5jC3j63SLv_Jh0V6LH',
+    art:'https://drive.google.com/drive/folders/1zK71WC2f93chxsMCaAXu57pNb6qcMroL?dmr=1&ec=wgc-drive-hero-goto&q=sharedwith:public%20parent:1zK71WC2f93chxsMCaAXu57pNb6qcMroL',
 }
 
 
 
 
 
-export {firebaseConfig,googleCloud};
+
+export {firebaseConfig,driveLink};

@@ -1,64 +1,47 @@
 import React, { useState } from "react";
-import GooglePicker from "react-google-drive-picker";
-import { googleCloud } from "../utils/f_config";
 
+import { driveLink } from "../utils/f_config";
 
+const SubjectDrive = ({subject}) => {
 
-const CLIENT_ID = googleCloud.clientId;
-const API_KEY = googleCloud.apiKey;
-const SCOPES = "https://www.googleapis.com/auth/drive.file";
+    const [localSubject, setLocalSubject] = useState(localStorage.getItem('subject'));
+    
 
-
-const SubjectDrive = () => {
-  const [openPicker, setOpenPicker] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
-  const handlePickerClick = () => {
-    setOpenPicker(true);
-  };
-
-  const handleFileSelection = (data) => {
-    if (data.action === 'picked') {
-      setSelectedFiles(data.docs);
-    }
-    setOpenPicker(false);
-  };
-
-  return (
-    <div>
-      <h1>Google Drive Picker</h1>
-      <button onClick={handlePickerClick}>Open Google Drive Picker</button>
-
-      <GooglePicker
-        clientId={CLIENT_ID}
-        developerKey={API_KEY}
-        scope={SCOPES}
-        onChange={handleFileSelection}
-        onAuthFailed={(data) => console.error("Auth failed:", data)}
-        multiselect={true}
-        navHidden={true}
-        authImmediate={false}
-        mimeTypes={["image/png", "image/jpeg", "application/pdf"]}
-        viewId={"DOCS"}
-        open={openPicker}
-      />
-      
-      {selectedFiles.length > 0 && (
-        <div>
-          <h2>Selected Files</h2>
-          <ul>
-            {selectedFiles.map((file, index) => (
-              <li key={index}>
-                <a href={file.url} target="_blank" rel="noopener noreferrer">
-                  {file.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            width: '100%'
+        }}>
+            <h1 style={{
+                marginBottom: '20px',
+                fontSize: '24px',
+                fontWeight: 'bold'
+            }}>{localSubject} Drive</h1>
+            <button 
+                onClick={()=>{
+                    window.open(driveLink[localSubject], '_blank');
+                    return;
+                }}
+                style={{
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    backgroundColor: '#8B00FF',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    transition: 'all 0.3s ease'
+                }}
+            >
+                Open {localSubject} drive
+            </button>
         </div>
-      )}
-    </div>
-  );
-};
+    )
+}
 
 export default SubjectDrive;
