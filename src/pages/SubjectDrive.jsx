@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import { driveLink } from "../utils/f_config";
 
-const SubjectDrive = ({subject}) => {
+const SubjectDrive = () => {
 
-    const [localSubject, setLocalSubject] = useState(localStorage.getItem('subject'));
+    const [localSubject, setLocalSubject] = useState(JSON.parse(localStorage.getItem('subject')));
     
+    const [subject, setSubject] = useState('');
 
     return (
         <div style={{
@@ -20,26 +21,60 @@ const SubjectDrive = ({subject}) => {
                 marginBottom: '20px',
                 fontSize: '24px',
                 fontWeight: 'bold'
-            }}>{localSubject} Drive</h1>
+            }}>Choose Your Subject</h1>
+            <select 
+                onChange={(e) => {
+                    setSubject(e.target.value);
+                }}
+                style={{
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    backgroundColor: '#f2f2f2',
+                    color: '#222',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    transition: 'all 0.3s ease',
+                    margin: '10px 0'
+                }}
+                >
+                {localSubject.map((s) => (
+                    <option key={s} value={s}>
+                        {s}
+                    </option>
+                ))}
+            </select>
+
+
             <button 
                 onClick={()=>{
-                    window.open(driveLink[localSubject], '_blank');
+                    if(subject === ''){
+                        alert('Please select a subject');
+                        return;
+                    }
+                    window.open(driveLink[subject], '_blank');
                     return;
                 }}
                 style={{
                     padding: '12px 24px',
                     fontSize: '16px',
-                    backgroundColor: '#8B00FF',
+                    backgroundColor: '#b80b92',
                     color: 'white',
                     border: 'none',
                     borderRadius: '8px',
                     cursor: 'pointer',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    margin: '10px 0'
                 }}
             >
-                Open {localSubject} drive
+                Open {subject} drive
             </button>
+
+
+            
         </div>
     )
 }
