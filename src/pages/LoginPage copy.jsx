@@ -1,64 +1,40 @@
 import logo from "../assets/img/logo.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
-import { MdOutlineEmail, MdOutlineLock, MdOutlinePerson } from "react-icons/md";
+import { MdEmail, MdLock, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import { signUp, signInWithGoogle } from "../utils/firebase_auth";
+import { auth, signIn, signInWithGoogle } from "../utils/firebase_auth";
+import { useTranslation } from "react-i18next";
 
-function SignUpPage() {
+function LoginPage() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  
-
-
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  //언어 변경
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  //web login
+  const onLogin = async () => {
+    var result = await signIn(email, password);
+    if(result){
+      navigate("/subject-drive");
+    }else{
+      alert("check your email or password");
+    }
+  };
 
 
-  //no used
+  //google login
   const onGoogleLogin = async () => {
-    var result = await signInWithGoogle();
-    if(result){
-      //로그인 페이지 이동
-      navigate("/");
-    }
+    await signInWithGoogle();
   };
 
-
   
-  const onSignUp = async () => {
-
-    if(!isValidEmail(email)){
-      alert("Only Email Format is allowed.");
-      return;
-    }
-
-    if(password.length == 0){
-      alert("type your password");
-      return;
-    }
-
-    var result = await signUp(name,email, password);
-    if(result){
-      //로그인 페이지 이동
-      navigate("/");
-    }
-  };
-
-
-  
- 
-
-  
-
-  const isValidEmail = (email) => {
-    const googleEmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    return googleEmailRegex.test(email);
-  };
-
-
-
 
   return (
     <>
@@ -85,13 +61,14 @@ function SignUpPage() {
         <div
           style={{
             display: "flex",
-            width: "882px",
-            padding: "94px 45px 23px 45px",
+            flexDirection: "column",
+            width: "546px",
+            padding: "17px 56px 27px 56px",
             borderRadius: "30px",
             border: "1px solid",
             borderColor: "#000",
             position: "relative",
-            gap: "56px",
+            gap: "28px",
             backgroundColor: "#fff",
           }}
         >
@@ -101,62 +78,36 @@ function SignUpPage() {
             }}
           >
             <img
-              style={{ width: "139px", marginBottom: "21px" }}
+              style={{ width: "139px", marginBottom: "16px" }}
               src={logo}
               alt="logo"
             ></img>
             <div
               style={{
                 fontSize: "30px",
-                marginBottom: "21px",
+                marginBottom: "52px",
                 fontWeight: "600",
               }}
             >
-              Sign Up
+              {t('login')}
             </div>
             <div style={{ color: "#666", marginTop: "10px" }}>
-              If you have ID <br />
+              If you don’t have ID <br />
               You can{" "}
               <a
-                href="/"
+                href="/sign-up"
                 style={{
                   color: "#C10C99",
                   textDecoration: "none",
                   fontWeight: "bold",
                 }}
               >
-                Login here !
+                Sign up here !
               </a>
             </div>
           </div>
           <div>
-          <div style={{}}>
-              <label style={{ fontSize: "14px" }}>Name</label>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderBottom: "1px solid #ccc",
-                  padding: "0.5rem 0",
-                  width: "428px",
-                }}
-              >
-                <MdOutlinePerson style={{ marginRight: "0.5rem" }} />
-                <input
-                  type="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your name"
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    width: "100%",
-                    fontSize: "14px",
-                  }}
-                />
-              </div>
-            </div>
-            <div style={{ textAlign: "left", marginTop: "30px" }}>
+            <div style={{}}>
               <label style={{ fontSize: "14px" }}>Email</label>
               <div
                 style={{
@@ -182,7 +133,7 @@ function SignUpPage() {
                 />
               </div>
             </div>
-            <div style={{ textAlign: "left", marginTop: "30px" }}>
+            <div style={{ textAlign: "left", marginTop: "49px" }}>
               <label style={{ fontSize: "14px" }}>Password</label>
               <div
                 style={{
@@ -206,9 +157,22 @@ function SignUpPage() {
                   }}
                 />
               </div>
+              <a
+                href="#"
+                style={{
+                  display: "block",
+                  textAlign: "right",
+                  fontSize: "12px",
+                  color: "#666",
+                  textDecoration: "none",
+                  marginTop: "0.5rem",
+                }}
+              >
+                Forgot Email or Password?
+              </a>
             </div>
             <button
-              onClick={onSignUp}
+              onClick={onLogin}
               style={{
                 width: "100%",
                 marginTop: "96px",
@@ -222,8 +186,36 @@ function SignUpPage() {
                 boxShadow: "0 4px 8px rgba(193, 12, 153, 0.3)",
               }}
             >
-              Sign up
+              {t('login')}
             </button>
+            {/* <p
+              style={{
+                color: "#B5B5B5",
+                margin: "32px 0",
+                textAlign: "center",
+              }}
+            >
+              or continue with
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <FcGoogle
+                onClick={onGoogleLogin}
+                style={{
+                  cursor: "pointer",
+                  width: "41px",
+                  height: "41px",
+                  marginRight: "0.5rem",
+                  fontSize: "18px",
+                }}
+              />
+            </div> */}
+
+            
           </div>
         </div>
       </div>
@@ -231,4 +223,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default LoginPage;

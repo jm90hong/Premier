@@ -23,8 +23,6 @@ function LoginPage() {
     var result = await signIn(email, password);
     if(result){
       navigate("/subject-drive");
-    }else{
-      alert("check your email or password");
     }
   };
 
@@ -37,7 +35,7 @@ function LoginPage() {
   
 
   return (
-    <>
+      <>
       <div
         style={{
           display: "flex",
@@ -61,14 +59,13 @@ function LoginPage() {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            width: "546px",
-            padding: "17px 56px 27px 56px",
+            width: "882px",
+            padding: "94px 45px 23px 45px",
             borderRadius: "30px",
             border: "1px solid",
             borderColor: "#000",
             position: "relative",
-            gap: "28px",
+            gap: "56px",
             backgroundColor: "#fff",
           }}
         >
@@ -78,21 +75,21 @@ function LoginPage() {
             }}
           >
             <img
-              style={{ width: "139px", marginBottom: "16px" }}
+              style={{ width: "139px", marginBottom: "21px" }}
               src={logo}
               alt="logo"
             ></img>
             <div
               style={{
                 fontSize: "30px",
-                marginBottom: "52px",
+                marginBottom: "21px",
                 fontWeight: "600",
               }}
             >
-              {t('login')}
+              Login
             </div>
             <div style={{ color: "#666", marginTop: "10px" }}>
-              If you don’t have ID <br />
+              If you don't have ID <br />
               You can{" "}
               <a
                 href="/sign-up"
@@ -102,7 +99,7 @@ function LoginPage() {
                   fontWeight: "bold",
                 }}
               >
-                Sign up here !
+                Sign up here!
               </a>
             </div>
           </div>
@@ -157,20 +154,10 @@ function LoginPage() {
                   }}
                 />
               </div>
-              <a
-                href="#"
-                style={{
-                  display: "block",
-                  textAlign: "right",
-                  fontSize: "12px",
-                  color: "#666",
-                  textDecoration: "none",
-                  marginTop: "0.5rem",
-                }}
-              >
-                Forgot Email or Password?
-              </a>
             </div>
+
+
+  
             <button
               onClick={onLogin}
               style={{
@@ -186,36 +173,11 @@ function LoginPage() {
                 boxShadow: "0 4px 8px rgba(193, 12, 153, 0.3)",
               }}
             >
-              {t('login')}
+              Login
             </button>
-            {/* <p
-              style={{
-                color: "#B5B5B5",
-                margin: "32px 0",
-                textAlign: "center",
-              }}
-            >
-              or continue with
-            </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <FcGoogle
-                onClick={onGoogleLogin}
-                style={{
-                  cursor: "pointer",
-                  width: "41px",
-                  height: "41px",
-                  marginRight: "0.5rem",
-                  fontSize: "18px",
-                }}
-              />
-            </div> */}
-
             
+
+
           </div>
         </div>
       </div>

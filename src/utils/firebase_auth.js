@@ -14,6 +14,7 @@ import {
   addDoc,
   collection,
   getDoc,
+  setDoc,
   doc,
   query,
   where,
@@ -29,7 +30,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 
-
+//로그인
 const signIn = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
@@ -40,18 +41,23 @@ const signIn = async (email, password) => {
       const userDoc = querySnapshot.docs[0];
       const userData = userDoc.data();
       console.log("사용자 정보:", userData);
-      localStorage.setItem('subject', userData.subject);
+      if(userData.subject.length == 0){
+        alert("You don't have any subject");
+        return false;
+      }
+      localStorage.setItem('subject', JSON.stringify(userData.subject));
     } else {
       console.log("해당 이메일의 사용자를 찾을 수 없습니다.");
     }
     
 
 
-
+    
     alert("sign in success");
     console.log(result);
     return true;
   } catch (error) {
+    alert("check your email or password");
     console.error(error);
     return false;
   }
@@ -103,7 +109,11 @@ const signInWithGoogle = async () => {
   }
 };
 
-const signUp = async (email, password,subject) => {
+const signUp = async (name,email, password) => {
+
+
+  alert(`${name} ${email} ${password}`);
+
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const usersRef = collection(db, "users");
@@ -118,12 +128,13 @@ const signUp = async (email, password,subject) => {
 
 
     // 사용자 정보를 Firestore에 저장
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(collection(db, "users"), `${name}_${result.user.email}`), {
+      name: name,
       email: result.user.email,
       authProvider: 'web',
       password: password,
       createdAt: new Date(),
-      subject:subject
+      subject:[]
     });
 
     alert("sign up success");
