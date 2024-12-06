@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import { driveLink } from "../utils/f_config";
 
@@ -7,6 +7,12 @@ const SubjectDrive = () => {
     const [localSubject, setLocalSubject] = useState(JSON.parse(localStorage.getItem('subject')));
     
     const [subject, setSubject] = useState('');
+
+    useEffect(() => {
+        if (localSubject && localSubject.length > 0) {
+            setSubject(localSubject[0]);
+        }
+    }, []);
 
     return (
         <div style={{

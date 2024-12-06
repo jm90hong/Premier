@@ -111,9 +111,6 @@ const signInWithGoogle = async () => {
 
 const signUp = async (name,email, password) => {
 
-
-  alert(`${name} ${email} ${password}`);
-
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const usersRef = collection(db, "users");
