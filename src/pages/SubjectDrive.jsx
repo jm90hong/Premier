@@ -27,7 +27,7 @@ const SubjectDrive = () => {
                 marginBottom: '20px',
                 fontSize: '24px',
                 fontWeight: 'bold'
-            }}>Choose Your Subject</h1>
+            }}>Select Your Subject</h1>
             <select 
                 onChange={(e) => {
                     setSubject(e.target.value);
@@ -76,7 +76,7 @@ const SubjectDrive = () => {
                     margin: '10px 0'
                 }}
             >
-                Open {subject} drive
+                Access {subject} Curriculum
             </button>
 
 

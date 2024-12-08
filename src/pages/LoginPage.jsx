@@ -88,19 +88,12 @@ function LoginPage() {
             >
               Login
             </div>
-            <div style={{ color: "#666", marginTop: "10px" }}>
-              If you don't have ID <br />
-              You can{" "}
-              <a
-                href="/sign-up"
-                style={{
-                  color: "#C10C99",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                }}
-              >
-                Sign up here!
-              </a>
+            <div onClick={() => navigate("/sign-up")} style={{ color: "#666", marginTop: "10px", cursor: "pointer" }}>
+              If you do not have an<br/>
+              account, you can create<br/>
+              one here.
+            
+              
             </div>
           </div>
           <div>
