@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, signIn, signInWithGoogle } from "../utils/firebase_auth";
 import { useTranslation } from "react-i18next";
 
+//new
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
