@@ -112,21 +112,11 @@ function SignUpPage() {
                 fontWeight: "600",
               }}
             >
-              Sign Up
+              Create Account
             </div>
-            <div style={{ color: "#666", marginTop: "10px" }}>
-              If you have ID <br />
-              You can{" "}
-              <a
-                href="/"
-                style={{
-                  color: "#C10C99",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                }}
-              >
-                Login here !
-              </a>
+            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer" }}>
+              If you already have an<br/>
+              account, you can login here.
             </div>
           </div>
           <div>
@@ -222,7 +212,7 @@ function SignUpPage() {
                 boxShadow: "0 4px 8px rgba(193, 12, 153, 0.3)",
               }}
             >
-              Sign up
+              Create Account
             </button>
           </div>
         </div>
