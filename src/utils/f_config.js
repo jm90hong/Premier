@@ -10,16 +10,28 @@
 //   };
 
   
-//hjm
+// //hjm
+// const firebaseConfig = {
+//     apiKey: "AIzaSyC7Aqs0stZxgmBGnvD0ZGeRNmLIMWQHniQ",
+//     authDomain: "jmcoding-27c0b.firebaseapp.com",
+//     projectId: "jmcoding-27c0b",
+//     storageBucket: "jmcoding-27c0b.appspot.com",
+//     messagingSenderId: "66168997581",
+//     appId: "1:66168997581:web:1156d9477cc2423df20b84",
+//     measurementId: "G-3DY71V8Q8X"
+// };
+
+//premier
 const firebaseConfig = {
-    apiKey: "AIzaSyC7Aqs0stZxgmBGnvD0ZGeRNmLIMWQHniQ",
-    authDomain: "jmcoding-27c0b.firebaseapp.com",
-    projectId: "jmcoding-27c0b",
-    storageBucket: "jmcoding-27c0b.appspot.com",
-    messagingSenderId: "66168997581",
-    appId: "1:66168997581:web:1156d9477cc2423df20b84",
-    measurementId: "G-3DY71V8Q8X"
-};
+    apiKey: "AIzaSyBgQSP1tGV8yeGOkvszWabvCQskB7WWVF0",
+    authDomain: "premier-portal-1add0.firebaseapp.com",
+    projectId: "premier-portal-1add0",
+    storageBucket: "premier-portal-1add0.firebasestorage.app",
+    messagingSenderId: "105286224845",
+    appId: "1:105286224845:web:64f469ace9a5bd3b0e1284",
+    measurementId: "G-L5LJTB7X5W" // Analytics 활성화된 경우
+  };
+
 
 
 //public drive link
