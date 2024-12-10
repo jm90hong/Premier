@@ -11,7 +11,10 @@ function SignUpPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   
+
+
   const navigate = useNavigate();
+
 
   //no used
   const onGoogleLogin = async () => {
@@ -21,8 +24,11 @@ function SignUpPage() {
       navigate("/");
     }
   };
+
+
   
   const onSignUp = async () => {
+
     if(!isValidEmail(email)){
       alert("Only Email Format is allowed.");
       return;
@@ -40,10 +46,19 @@ function SignUpPage() {
     }
   };
 
+
+  
+ 
+
+  
+
   const isValidEmail = (email) => {
     const googleEmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     return googleEmailRegex.test(email);
   };
+
+
+
 
   return (
     <>
@@ -99,22 +114,13 @@ function SignUpPage() {
             >
               Create Account
             </div>
-            <div 
-              onClick={() => navigate("/")} 
-              style={{ 
-                color: "#666", 
-                marginTop: "10px", 
-                cursor: "pointer", 
-                textDecoration: "underline" 
-              }}
-            >
+            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer" }}>
               If you already have an<br/>
               account, you can login here.
             </div>
           </div>
           <div>
-            {/* Rest of the component remains the same */}
-            <div style={{}}>
+          <div style={{}}>
               <label style={{ fontSize: "14px" }}>Name</label>
               <div
                 style={{
@@ -140,7 +146,74 @@ function SignUpPage() {
                 />
               </div>
             </div>
-            {/* Rest of the input fields and button */}
+            <div style={{ textAlign: "left", marginTop: "30px" }}>
+              <label style={{ fontSize: "14px" }}>Email</label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  borderBottom: "1px solid #ccc",
+                  padding: "0.5rem 0",
+                  width: "428px",
+                }}
+              >
+                <MdOutlineEmail style={{ marginRight: "0.5rem" }} />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    width: "100%",
+                    fontSize: "14px",
+                  }}
+                />
+              </div>
+            </div>
+            <div style={{ textAlign: "left", marginTop: "30px" }}>
+              <label style={{ fontSize: "14px" }}>Password</label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  borderBottom: "1px solid #ccc",
+                  padding: "0.5rem 0",
+                }}
+              >
+                <MdOutlineLock style={{ marginRight: "0.5rem" }} />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    width: "100%",
+                    fontSize: "14px",
+                  }}
+                />
+              </div>
+            </div>
+            <button
+              onClick={onSignUp}
+              style={{
+                width: "100%",
+                marginTop: "96px",
+                padding: "0.75rem",
+                backgroundColor: "#C10C99",
+                color: "#000",
+                borderRadius: "32px",
+                border: "none",
+                fontSize: "16px",
+                cursor: "pointer",
+                boxShadow: "0 4px 8px rgba(193, 12, 153, 0.3)",
+              }}
+            >
+              Create Account
+            </button>
           </div>
         </div>
       </div>
