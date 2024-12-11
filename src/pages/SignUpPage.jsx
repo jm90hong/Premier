@@ -10,11 +10,8 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  
-
 
   const navigate = useNavigate();
-
 
   //no used
   const onGoogleLogin = async () => {
@@ -25,8 +22,6 @@ function SignUpPage() {
     }
   };
 
-
-  
   const onSignUp = async () => {
 
     if(!isValidEmail(email)){
@@ -46,19 +41,10 @@ function SignUpPage() {
     }
   };
 
-
-  
- 
-
-  
-
   const isValidEmail = (email) => {
     const googleEmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     return googleEmailRegex.test(email);
   };
-
-
-
 
   return (
     <>
@@ -114,13 +100,13 @@ function SignUpPage() {
             >
               Create Account
             </div>
-            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer" }}>
-              If you already have an<br/>
+            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
+              If you already have an<br />
               account, you can login here.
             </div>
           </div>
           <div>
-          <div style={{}}>
+            <div style={{}}>
               <label style={{ fontSize: "14px" }}>Name</label>
               <div
                 style={{
@@ -222,3 +208,4 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
+
