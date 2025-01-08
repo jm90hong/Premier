@@ -13,30 +13,29 @@ function SignUpPage() {
 
   const navigate = useNavigate();
 
-  //no used
+  // No used
   const onGoogleLogin = async () => {
     var result = await signInWithGoogle();
-    if(result){
-      //로그인 페이지 이동
+    if (result) {
+      // Navigate to login page
       navigate("/");
     }
   };
 
   const onSignUp = async () => {
-
-    if(!isValidEmail(email)){
+    if (!isValidEmail(email)) {
       alert("Only Email Format is allowed.");
       return;
     }
 
-    if(password.length == 0){
-      alert("type your password");
+    if (password.length === 0) {
+      alert("Type your password");
       return;
     }
 
-    var result = await signUp(name,email, password);
-    if(result){
-      //로그인 페이지 이동
+    var result = await signUp(name, email, password);
+    if (result) {
+      // Navigate to login page
       navigate("/");
     }
   };
@@ -67,7 +66,7 @@ function SignUpPage() {
             top: 40,
             left: 34,
           }}
-        ></img>
+        />
         <div
           style={{
             display: "flex",
@@ -90,7 +89,7 @@ function SignUpPage() {
               style={{ width: "139px", marginBottom: "21px" }}
               src={logo}
               alt="logo"
-            ></img>
+            />
             <div
               style={{
                 fontSize: "30px",
@@ -100,13 +99,24 @@ function SignUpPage() {
             >
               Create Account
             </div>
-            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
-              If you already have an<br />
-              account, you can login here.
+            <div style={{ color: "#666", marginTop: "10px" }}>
+              If you already have an
+              <br />
+              account, you can login{" "}
+              <span
+                onClick={() => navigate("/")}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+              >
+                here
+              </span>
+              .
             </div>
           </div>
           <div>
-            <div style={{}}>
+            <div>
               <label style={{ fontSize: "14px" }}>Name</label>
               <div
                 style={{
@@ -208,4 +218,5 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
+
 
