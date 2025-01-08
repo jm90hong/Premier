@@ -1,42 +1,37 @@
 import logo from "../assets/img/logo.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
-import { MdEmail, MdLock, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
+import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { auth, signIn, signInWithGoogle } from "../utils/firebase_auth";
+import { signIn, signInWithGoogle } from "../utils/firebase_auth";
 import { useTranslation } from "react-i18next";
 
-//new
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  //언어 변경
+  // Change language
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
-  //web login
+  // Web login
   const onLogin = async () => {
     var result = await signIn(email, password);
-    if(result){
+    if (result) {
       navigate("/subject-drive");
     }
   };
 
-
-  //google login
+  // Google login
   const onGoogleLogin = async () => {
     await signInWithGoogle();
   };
 
-  
-
   return (
-      <>
+    <>
       <div
         style={{
           display: "flex",
@@ -89,10 +84,22 @@ function LoginPage() {
             >
               Login
             </div>
-              <div onClick={() => navigate("/sign-up")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
-              If you do not have an<br/>
-              account, you can create<br/>
-              one here.
+            <div style={{ color: "#666", marginTop: "10px" }}>
+              If you do not have an
+              <br />
+              account, you can create
+              <br />
+              one{" "}
+              <span
+                onClick={() => navigate("/sign-up")}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+              >
+                here
+              </span>
+              .
             </div>
           </div>
           <div>
@@ -148,8 +155,6 @@ function LoginPage() {
               </div>
             </div>
 
-
-  
             <button
               onClick={onLogin}
               style={{
@@ -167,9 +172,6 @@ function LoginPage() {
             >
               Login
             </button>
-            
-
-
           </div>
         </div>
       </div>
@@ -178,3 +180,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
