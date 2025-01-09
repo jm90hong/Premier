@@ -1,3 +1,4 @@
+import logo from "../assets/img/logo.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
 import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
