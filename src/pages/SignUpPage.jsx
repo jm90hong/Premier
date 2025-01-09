@@ -1,4 +1,3 @@
-@@ -1,224 +1,211 @@
 import logo from "../assets/img/logo.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
