@@ -1,3 +1,4 @@
+@@ -1,224 +1,211 @@
 import logo from "../assets/img/logo.png";
 import backgroundLogo from "../assets/img/background-logo.png";
 import { useState } from "react";
@@ -108,9 +109,9 @@ function SignUpPage() {
             <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
               If you already have an<br />
               account, you can login here.
+            </div>
           </div>
           <div>
-          <div style={{}}>
             <div style={{}}>
               <label style={{ fontSize: "14px" }}>Name</label>
               <div
