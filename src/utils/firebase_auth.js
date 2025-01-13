@@ -30,6 +30,15 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 
+//전체 회원 조회
+const getAllUsers = async () => {
+  const usersRef = collection(db, "users");
+  const querySnapshot = await getDocs(usersRef);
+  console.log(querySnapshot.docs.map((doc) => doc.data()));
+  return querySnapshot.docs.map((doc) => doc.data());
+};
+
+
 //로그인
 const signIn = async (email, password) => {
   try {
@@ -146,4 +155,4 @@ const signUp = async (name,email, password) => {
   }
 };
 
-export { auth, signInWithGoogle, signIn, signUp };
+export { auth, signInWithGoogle, signIn, signUp ,getAllUsers};

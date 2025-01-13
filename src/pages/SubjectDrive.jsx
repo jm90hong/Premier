@@ -1,9 +1,12 @@
 import React, { useState,useEffect } from "react";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { driveLink } from "../utils/f_config";
+import { useNavigate } from "react-router-dom";
 
 const SubjectDrive = () => {
 
+    const navigate = useNavigate(); 
     const [localSubject, setLocalSubject] = useState(JSON.parse(localStorage.getItem('subject')));
     
     const [subject, setSubject] = useState('');
@@ -21,7 +24,8 @@ const SubjectDrive = () => {
             justifyContent: 'center',
             alignItems: 'center',
             height: '100vh',
-            width: '100%'
+            width: '100%',
+            position: 'relative'
         }}>
             <h1 style={{
                 marginBottom: '20px',
@@ -78,7 +82,12 @@ const SubjectDrive = () => {
             >
                 Access {subject} Curriculum
             </button>
+            
 
+
+            <i style={{position:'absolute',top:'10px',right:'10px',color:'#b80b92',fontSize:'24px',cursor:'pointer'}} onClick={()=>{ navigate('/users'); }}>
+                <FontAwesomeIcon icon={faCog} />
+            </i>
 
             
         </div>
