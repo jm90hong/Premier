@@ -89,13 +89,11 @@ function LoginPage() {
             >
               Login
             </div>
-              <div onClick={() => navigate("/sign-up")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
-              If you do not have an<br/>
-              account, you can create<br/>
-              one here.
-            
-              
-            </div>
+              <div style={{ color: "#666", marginTop: "10px"}}>
+                If you do not have an<br/>
+                account, you can create one<br/>
+                <span onClick={() => navigate("/sign-up")} style={{ color: "#b80b92",cursor:'pointer' }}>here</span>.
+              </div>
           </div>
           <div>
             <div style={{}}>

@@ -105,10 +105,12 @@ function SignUpPage() {
             >
               Create Account
             </div>
-            <div onClick={() => navigate("/")} style={{ color: "#666", marginTop: "10px", cursor: "pointer", textDecoration: "underline" }}>
-              If you already have an<br />
-              account, you can login here.
-            </div>
+
+            <div style={{ color: "#666", marginTop: "10px"}}>
+                If you already have an<br/>
+                account, you can login<br/>
+                <span onClick={() => navigate("/")} style={{ color: "#b80b92",cursor:'pointer' }}>here</span>.
+              </div>
           </div>
           <div>
             <div style={{}}>
